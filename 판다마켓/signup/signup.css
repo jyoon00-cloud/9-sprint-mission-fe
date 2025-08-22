@@ -113,7 +113,7 @@ form {
 }
 
 .simple-login p {
-    color: var(--Secondary-800, #1F2937);
+    color: var(--gray800-color);
     font-family: Pretendard;
     font-size: 1rem;
     font-style: normal;

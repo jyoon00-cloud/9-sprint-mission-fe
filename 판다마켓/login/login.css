@@ -15,12 +15,12 @@ body {
 }
 
 .login-container {
-    width: 40rem; /* 412px */
+    width: 40rem; 
     background: #fcfcfc;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem; /* 40px */
+    gap: 1.5rem; 
     margin-top: 3.75rem;
 }
 
@@ -36,7 +36,7 @@ form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* 24px */
+    gap: 1.5rem; 
 }
 
 .input-group {
@@ -56,7 +56,7 @@ form {
 
 .login-input {
     width: 100%;
-    padding: 1rem; /* 16px */
+    padding: 1rem;
     border: none;
     border-radius: .75rem;
     background-color: var(--gray100-color);
@@ -65,7 +65,7 @@ form {
 }
 
 .login-input:focus {
-    border: 1px solid var(--primary-100-color);
+    border: .0625rem solid var(--primary-100-color);
     outline: none;
 }
 
@@ -106,11 +106,11 @@ form {
 
 .login-btn {
     width: 100%;
-    padding: 1rem; /* 16px */
+    padding: 1rem; 
     background: var(--gray400-color);
     color: #fff;
     border: none;
-    border-radius: 40px;
+    border-radius: 2.5rem;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
@@ -139,18 +139,17 @@ form {
     font-size: 1rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 1.625rem; /* 162.5% */
+    line-height: 1.625rem; 
     margin-left: 1.4375rem
 }
 
 .social-login {
     display: flex;
-    gap: 0.75rem; /* 아이콘들 사이의 간격 */
-    /* 아이콘 컨테이너를 오른쪽 끝에 배치 */
+    gap: 0.75rem; 
 }
 
 .social-login img {
-    width: 2.625rem; /* 42px */
+    width: 2.625rem; 
     height: 2.625rem;
 }
 
@@ -162,17 +161,17 @@ form {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.25rem; /* 4px */
+    gap: 0.25rem; 
 }
 
 .signup-container p {
     color: var(--gray500-color);
-    font-size: 0.875rem; /* 14px */
+    font-size: 0.875rem; 
 }
 
 .signup-link {
     color: var(--primary-100-color);
-    font-size: 0.875rem; /* 14px */
+    font-size: 0.875rem; 
     font-weight: 500;
     text-decoration: underline;
 }
