@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 
+
 body{
     margin: 0;
 }
@@ -37,6 +38,8 @@ header{
     line-height: 3rem;
     cursor: pointer;
 }
+
+
 
 .header-box{
     width: 100%;
