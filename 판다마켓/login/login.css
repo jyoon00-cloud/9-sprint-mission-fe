@@ -1,0 +1,177 @@
+@import "../global.css";
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100vh;
+    gap: 2.5rem;
+    background-color: #FCFCFC;
+}
+
+.login-container {
+    width: 40rem; 
+    background: #fcfcfc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem; 
+    margin-top: 3.75rem;
+}
+
+
+
+
+.logo img {
+    width: 100%;
+    height: auto;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; 
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; 
+}
+
+.input-group label {
+    color: var(--gray800-color);
+    font-family: Pretendard;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.625rem; 
+}
+
+.login-input {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: .75rem;
+    background-color: var(--gray100-color);
+    font-size: 1rem;
+    color: var(--gray700-color);
+}
+
+.login-input:focus {
+    border: .0625rem solid var(--primary-100-color);
+    outline: none;
+}
+
+
+.password-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 0.75rem; 
+    background-color: var(--gray100-color);
+    padding: 0 1rem;
+    border:none;
+}
+
+.password-input {
+    flex: 1;
+    border: none;
+    background: var(--gray100-color);
+    padding: 1rem 0;
+    font-size: 1rem;
+    outline: none;
+}
+
+.visibility-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-container:focus-within {
+    border: .0625rem solid var(--primary-100-color); 
+    outline: none;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 1rem; 
+    background: var(--gray400-color);
+    color: #fff;
+    border: none;
+    border-radius: 2.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1rem; 
+}
+
+.login-btn:hover {    
+    background: var(--primary-100-color);
+}
+
+
+.simple-login {
+    width: 100%;
+    height: 4.625rem;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    margin: 1.5rem auto;
+    border-radius: .5rem;
+    background: #E6F2FF;
+}
+
+.simple-login p {
+    color: var(--gray800-color);
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.625rem; 
+    margin-left: 1.4375rem
+}
+
+.social-login {
+    display: flex;
+    gap: 0.75rem; 
+}
+
+.social-login img {
+    width: 2.625rem; 
+    height: 2.625rem;
+}
+
+#kakao {
+    margin-right: 1.4375rem;
+}
+
+.signup-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem; 
+}
+
+.signup-container p {
+    color: var(--gray500-color);
+    font-size: 0.875rem; 
+}
+
+.signup-link {
+    color: var(--primary-100-color);
+    font-size: 0.875rem; 
+    font-weight: 500;
+    text-decoration: underline;
+}
