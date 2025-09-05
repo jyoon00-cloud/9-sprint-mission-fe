@@ -12,20 +12,30 @@
 
         gtag('config', 'G-7EFGX42CD4');
     </script>
-  <meta charset="utf-8">
-  <title>판다마켓</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="global.css">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <title>판다마켓</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="style.css">
+    <!--메타태그-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="판다마켓">
+    <meta property="og:description" content="일상에서 모든 물건을 거래해보세요">
+    <meta property="og:image" content="https://codeit-panda-jyoon00.netlify.app/img/Panda_logo.png">
+    <meta property="og:url" content="https://codeit-panda-jyoon00.netlify.app/">
+    <meta property="og:type" content="website">
 </head>
 
 <body>
     <header>
         <div class="header-box">    
             <a href="/">
-                <img id="header-logo" src="img/Panda_logo.png">
+                <picture>
+                    <source srcset="img/mobile_logo.png" media="(max-width: 743px)">
+                    <img id="header-logo" src="img/Panda_logo.png">
+                </picture>
             </a>
             <a class="login-button" href="/login"> 로그인 </a>
         </div>
@@ -34,7 +44,7 @@
         <div class="home">
             <div class="home-box">
                 <div class="home-text-box">
-                    <span id="home-text">일상의 모든 물건을<br>거래해 보세요</span>
+                    <span id="home-text">일상의 모든 물건을 <br>거래해 보세요</span>
                     <a class="button1" href="/item">구경하러 가기</a>
                 </div>
                 <img id="img-home-top" src="img/Img_home_top.png">
@@ -45,7 +55,7 @@
         <div class="main-content">
             <div class="content">
                 <div class="content-box">
-                    <img src="img/Img_home_01.png">
+                    <img class="content-img" src="img/Img_home_01.png">
                     <div class="content-text-box">
                         <div class="content-header">
                             Hot item
@@ -62,7 +72,7 @@
                 </div>
             </div>
             <div class="content">
-                <div class="content-box">
+                <div class="content-box" id="reversecon">
                     <div id="second-content" class="content-text-box">
                         <div class="content-header">
                             Search
@@ -76,12 +86,12 @@
                         쉽게 찾아보세요
                         </div>                        
                     </div>
-                    <img src="img/Img_home_02.png">
+                <img class="content-img" src="img/Img_home_02.png">
                 </div>
             </div>
             <div class="content">
                 <div class="content-box">
-                    <img src="img/Img_home_03.png">
+                    <img class="content-img" src="img/Img_home_03.png">
                     <div class="content-text-box">
                         <div class="content-header">
                             Register
@@ -110,7 +120,7 @@
                 <img id="home-bottom" src="img/Img_home_bottom.png">            
             </div>
         </div>
-        <div class="footer-bottom">
+        <div class="footer-bottom footer-desktop">
             <div class="footer-bottom-box">
                 <div class="footer-codeit">
                     ⓒcodeit - 2024
@@ -125,18 +135,50 @@
                 </div>
                 <div class="footer-sns">
                     <a class="sns-box" target="_blank" href="https://www.facebook.com/">
-                        <img src="img/ic_facebook.png">
+                        <img class="sns-img" src="img/ic_facebook.png">
                     </a>
                     <a class="sns-box" target="_blank" href="https://www.twitter.com/">
-                        <img src="img/ic_twitter.png">
+                        <img class="sns-img" src="img/ic_twitter.png">
                     </a>
                     <a class="sns-box" target="_blank" href="https://www.youtube.com/">
-                        <img src="img/ic_youtube.png">
+                        <img class="sns-img" src="img/ic_youtube.png">
                     </a>
                     <a class="sns-box" target="_blank" href="https://www.instagram.com/">
-                        <img src="img/ic_instagram.png">
+                        <img class="sns-img" src="img/ic_instagram.png">
                     </a>
                 </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom footer-mobile">
+            <div class="footer-bottom-box">
+                <div class="footer-group">
+                    <div class="footer-ppf">
+                        <a href="/privacy">
+                            Privacy Policy
+                        </a>
+                        <a href="/faq">
+                            FAQ
+                        </a>
+                    </div>
+                    <div class="footer-sns">
+                        <a class="sns-box" target="_blank" href="https://www.facebook.com/">
+                            <img class="sns-img" src="img/ic_facebook.png">
+                        </a>
+                        <a class="sns-box" target="_blank" href="https://www.twitter.com/">
+                            <img class="sns-img" src="img/ic_twitter.png">
+                        </a>
+                        <a class="sns-box" target="_blank" href="https://www.youtube.com/">
+                            <img class="sns-img" src="img/ic_youtube.png">
+                        </a>
+                        <a class="sns-box" target="_blank" href="https://www.instagram.com/">
+                            <img class="sns-img" src="img/ic_instagram.png">
+                        </a>
+                    </div>
+                </div>
+                    <div class="footer-codeit">
+                        ⓒcodeit - 2024
+                    </div>             
             </div>
         </div>
     </footer>
