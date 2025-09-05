@@ -335,7 +335,6 @@ body a {
 /*mobile ver*/
 @media (min-width:375px) and (max-width:743px){
 /*mobile st*/
-
     body{
         padding: 0 1rem;
     }
@@ -417,7 +416,6 @@ body a {
         display: flex;
     }
     .footer-bottom-box{       
-        width:100%;
         height: auto;
         flex-direction: column;
         gap: 1.5rem;

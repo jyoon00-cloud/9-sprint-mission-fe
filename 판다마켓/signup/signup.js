@@ -18,7 +18,7 @@ const signupBtn = document.querySelector('.signup-btn');
 const emailError = emailInput.nextElementSibling;
 const passwordError = passwordInput.parentElement.nextElementSibling;
 const confirmPasswordError = confirmPasswordInput.parentElement.nextElementSibling;
-const visibilityBtns = document.querySelectorAll('.visibility-btn');
+const visibilityBtn = document.querySelector('.visibility-btn')
 
 //이메일 유효성검사
 function signupEmail(){
@@ -81,16 +81,14 @@ confirmPasswordInput.addEventListener('focusout',()=>{
 form.addEventListener('input',updateButtonState);
 
 // 비밀번호 보이기 버튼
-visibilityBtns.forEach((btn, index) => {
-    btn.addEventListener('click', () => {
-        const input = index === 0 ? passwordInput : confirmPasswordInput;
-
-        if (input.type === 'password') {
-            input.type = 'text';
-        } else {
-            input.type = 'password';
-        }
-    });
+visibilityBtn.addEventListener('click', () => {
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        visibilityBtn.querySelector('img').src = '../img/btn_visibility.png';
+    } else {
+        passwordInput.type = 'password';
+        visibilityBtn.querySelector('img').src = '../img/btn_visibility.png';
+    }
 });
 
 // 회원가입 버튼

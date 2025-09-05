@@ -62,8 +62,10 @@ form.addEventListener('input', updateButtonState);
 visibilityBtn.addEventListener('click', () => {
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
+        visibilityBtn.querySelector('img').src = '../img/btn_visibility.png';
     } else {
         passwordInput.type = 'password';
+        visibilityBtn.querySelector('img').src = '../img/btn_visibility.png';
     }
 });
 
