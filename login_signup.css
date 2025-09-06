@@ -1,11 +1,11 @@
 * {
   box-sizing: border-box;
-  font-family: Pretnedard, sans-serif;
+  font-family: Pretendard, sans-serif;
 }
 
 body {
   margin: 0;
-  font-family: Pretendard;
+  font-family: Pretendard, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -95,7 +95,6 @@ a img {
   margin-bottom: 24px;
 }
 
-/* Enabled/disabled states */
 .submit-btn:disabled {
   background-color: #9CA3AF;
   cursor: not-allowed;
@@ -166,7 +165,6 @@ a img {
   margin-top: 8px;
 }
 
-/* Error Modal */
 .alert-message-box {
   position: fixed;
   inset: 0;
@@ -220,19 +218,15 @@ a img {
   position: absolute;
   right: 28px;
   bottom: 28px;
-  display: block; /* override centering */
+  display: block;
 }
 
-/* Responsive Design */
-/* Desktop: 1200px and up */
-/* Tablet: 744px ~ 1199px */
 
 @media (min-width: 744px) and (max-width: 1199px) {
   body { margin: 0 0 160px; }
   .logo-login { margin-top: 48px; }
 }
 
-/* Mobile: 375px ~ 743px */
 @media (max-width: 743px) {
   body {
     margin: 0 0 96px;
