@@ -446,7 +446,7 @@ body a {
     #home-bottom,.content-img,#img-home-top{
         width: 100%;
         height: auto;
-        margin: 0; /* 이미지 자체의 마진은 제거합니다. */
+        margin: 0; 
         display: block;
     }
 }
