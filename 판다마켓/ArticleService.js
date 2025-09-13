@@ -5,8 +5,8 @@ const apiClient = axios.create({
 });
 
 //get 메소드
-const getArticleList = (articleId) =>{
-    return apiClient.get(`/articles`,{articleId})
+const getArticleList = (params) =>{
+    return apiClient.get(`/articles`,{params})
         .then(response => {
             return response.data;
         })
