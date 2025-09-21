@@ -19,7 +19,7 @@ function ProductListPage() {
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
   const [orderBy, setOrderBy] = useState("recent");
-  const [query, setQuery] = useState("");
+  const [keyword, setKeyword] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -53,14 +53,14 @@ function ProductListPage() {
     }
   };
 
-  const handleQueryChange = (e) => {
-    setQuery(e.target.value);
+  const handleKeywordChange = (e) => {
+    setKeyword(e.target.value);
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     setPage(1);
-    handleLoad({ page: 1, orderBy, query, pageSize });
+    handleLoad({ page: 1, orderBy, keyword, pageSize });
   };
 
   const handleOrderByChange = (e) => {
@@ -73,8 +73,8 @@ function ProductListPage() {
   };
 
   useEffect(() => {
-    handleLoad({ page, orderBy, query, pageSize });
-  }, [page, orderBy, query, pageSize]);
+    handleLoad({ page, orderBy, keyword, pageSize });
+  }, [page, orderBy, keyword, pageSize]);
 
   useEffect(() => {
     handleLoadBest();
@@ -102,9 +102,9 @@ function ProductListPage() {
           <div className={styles.rightControls}>
             <form className={styles.searchForm} onSubmit={handleSearchSubmit}>
               <input
-                name="query"
-                value={query}
-                onChange={handleQueryChange}
+                name="keyword"
+                value={keyword}
+                onChange={handleKeywordChange}
                 placeholder="검색할 상품을 입력해주세요."
                 className={styles.searchInput}
               />

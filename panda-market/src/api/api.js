@@ -4,13 +4,13 @@ export async function getProducts({
   page = 1,
   pageSize = 10,
   orderBy = "createdAt",
-  query = "",
+  keyword = "",
 } = {}) {
   const params = new URLSearchParams();
   params.set("page", String(page));
   params.set("pageSize", String(pageSize));
   if (orderBy) params.set("orderBy", orderBy);
-  if (query) params.set("query", query);
+  if (keyword) params.set("keyword", keyword);
 
   const res = await fetch(`${BASE_URL}?${params.toString()}`);
   if (!res.ok) {
