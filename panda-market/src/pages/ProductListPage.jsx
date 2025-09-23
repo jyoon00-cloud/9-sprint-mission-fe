@@ -110,7 +110,7 @@ function ProductListPage() {
               />
             </form>
 
-            <Link to="/products/new" className={styles.addButton}>
+            <Link to="/registration" className={styles.addButton}>
               상품 등록하기
             </Link>
             <select
