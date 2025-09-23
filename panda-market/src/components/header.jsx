@@ -15,10 +15,10 @@ function Header() {
               <img id="header-logo" src={pandaLogo} />
             </picture>
           </Link>
-          <Link id="community" to="/login">
+          <Link id="community" to="/community">
             자유게시판
           </Link>
-          <Link id="usedmarket" to="/login">
+          <Link id="usedmarket" to="/items">
             중고마켓
           </Link>
         </div>
