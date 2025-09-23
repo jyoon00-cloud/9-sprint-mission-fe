@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./ProductCard.module.css";
+import defaultImg from "../assets/img_default.png";
 
 const formatPrice = (price) => {
   // 가격 표시
@@ -13,7 +14,14 @@ function ProductCard({ product, isBest = false }) {
 
   return (
     <div className={cardStyle}>
-      <img src={imageUrl} alt={product.name} className={styles.image} />
+      <img
+        src={imageUrl}
+        alt={product.name}
+        className={styles.image}
+        onError={(e) => {
+          e.currentTarget.src = defaultImg;
+        }}
+      />
       <div className={styles.info}>
         <p className={styles.name}>{product.name}</p>
         <p className={styles.price}>{formatPrice(product.price)}원</p>
