@@ -15,10 +15,8 @@ const getPageSize = (width) => {
 
 function ProductListPage() {
   const [products, setProducts] = useState([]);
-  const [bestProducts, setBestProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
-  const [orderBy, setOrderBy] = useState("recent");
   const [keyword, setKeyword] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -43,16 +41,6 @@ function ProductListPage() {
     }
   };
 
-  const handleLoadBest = async () => {
-    try {
-      const { list = [] } = (await getBestProducts()) || {};
-      setBestProducts(list.slice(0, 4));
-    } catch (error) {
-      console.error("베스트 상품 로딩 실패:", error);
-      setError(error);
-    }
-  };
-
   const handleKeywordChange = (e) => {
     setKeyword(e.target.value);
   };
@@ -60,12 +48,7 @@ function ProductListPage() {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     setPage(1);
-    handleLoad({ page: 1, orderBy, keyword, pageSize });
-  };
-
-  const handleOrderByChange = (e) => {
-    const nextOrderBy = e.target.value;
-    setOrderBy(nextOrderBy);
+    handleLoad({ page: 1, orderBy: "recent", keyword, pageSize });
   };
 
   const handlePageChange = (newPage) => {
@@ -73,12 +56,8 @@ function ProductListPage() {
   };
 
   useEffect(() => {
-    handleLoad({ page, orderBy, keyword, pageSize });
+    handleLoad({ page, orderBy: "recent", keyword, pageSize });
   }, [page, orderBy, keyword, pageSize]);
-
-  useEffect(() => {
-    handleLoadBest();
-  }, []);
 
   // 에러 발생 시
   if (error) {
@@ -87,15 +66,6 @@ function ProductListPage() {
 
   return (
     <div className={styles.container}>
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>베스트 상품</h2>
-        <div className={`${styles.productList} ${styles.bestList}`}>
-          {bestProducts.map((product) => (
-            <ProductCard key={product.id} product={product} isBest={true} />
-          ))}
-        </div>
-      </section>
-
       <section className={styles.section}>
         <div className={styles.controls}>
           <h2 className={styles.sectionTitle}>판매 중인 상품</h2>
@@ -113,14 +83,6 @@ function ProductListPage() {
             <Link to="/registration" className={styles.addButton}>
               상품 등록하기
             </Link>
-            <select
-              value={orderBy}
-              onChange={handleOrderByChange}
-              className={styles.orderBySelect}
-            >
-              <option value="recent">최신순</option>
-              <option value="favorite">좋아요순</option>
-            </select>
           </div>
         </div>
         {loading ? (
