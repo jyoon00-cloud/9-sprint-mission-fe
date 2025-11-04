@@ -16,15 +16,15 @@ export default function ForumHome() {
       </div>
       <div className="flex flex-col m-10">
         {/* 게시글 목록 */}
-        <div className="justify-between w-300  items-center flex">
+        <div className="justify-between w-full  items-center flex mb-4">
           <h2 className="font-bold text-xl">게시글</h2>
           <BtnSmall className="text-white">글쓰기</BtnSmall>
         </div>
-        <div className="flex w-250 justify-center items-center">
+        <div className="flex w-full h-11 justify-center items-center gap-8 mb-4">
           <InputBox
             className="w-full"
             placeholder="검색할 상품을 입력해주세요"
-          ></InputBox>
+          />
           <DropDown />
         </div>
         <div className="">
