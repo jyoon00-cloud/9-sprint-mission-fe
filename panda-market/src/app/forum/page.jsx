@@ -1,6 +1,7 @@
+"use client";
 import { BtnSmall } from "@/components/ui/button";
 import { BestCard, CardList } from "@/components/ui/card";
-import DropDown from "@/components/ui/dropdown";
+import DropDown from "@/components/ui/dropdown copy";
 import InputBox from "@/components/ui/inputBox";
 
 export default function ForumHome() {

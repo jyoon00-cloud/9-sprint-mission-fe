@@ -1,8 +1,35 @@
-export default function DropDown() {
+"use client";
+import { useState } from "react";
+// 완성후 대체
+function Dropdown({ onSortSelection }) {
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const toggleDropdown = () => {
+    setIsDropdownVisible(!isDropdownVisible);
+  };
+
   return (
-    <select className="flex leading-6.5 w-32.5 h-10.5 pt-3 pb-3 pl-5 pr-5 flex-col items-start gap-2.5 border bg-white border-gray-200 border-solid">
-      <option defaultValue="최신순">최신순</option>
-      <option value="좋아요순">좋아요순</option>
-    </select>
+    <div>
+      <button onClick={toggleDropdown}>{onSortSelection}</button>
+      {isDropdownVisible && (
+        <div>
+          <div
+            onClick={() => {
+              onSortSelection("최신순");
+              setIsDropdownVisible(false);
+            }}
+          >
+            최신순
+          </div>
+          <div
+            onClick={() => {
+              onSortSelection("인기순");
+              setIsDropdownVisible(false);
+            }}
+          >
+            인기순
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
