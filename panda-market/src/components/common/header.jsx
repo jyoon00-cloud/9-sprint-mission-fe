@@ -4,8 +4,8 @@ import { BtnSmall } from "../ui/button";
 
 export default function Header() {
   return (
-    <header className="fixed top-0 w-full z-50">
-      <div className="h-17.5 flex mx-auto justify-between items-center w-auto">
+    <header className="fixed top-0 w-full z-50 pl-15 pr-15 bg-white">
+      <div className="max-w-480 h-17.5 flex mx-auto justify-between items-center w-auto">
         <div className="flex gap  items-center">
           <Link href="/" className="flex gap-4">
             <Image
@@ -26,7 +26,7 @@ export default function Header() {
         </div>
         <div>
           <Link href="/login">
-            <BtnSmall>로그인</BtnSmall>
+            <BtnSmall className="text-gray-100">로그인</BtnSmall>
           </Link>
         </div>
       </div>
