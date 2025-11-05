@@ -3,6 +3,7 @@ import { BtnSmall } from "@/components/ui/button";
 import { BestCard, CardList } from "@/components/ui/card";
 import DropDown from "@/components/ui/dropdown copy";
 import InputBox from "@/components/ui/inputBox";
+import Link from "next/link";
 
 export default function ForumHome() {
   return (
@@ -19,11 +20,13 @@ export default function ForumHome() {
         {/* 게시글 목록 */}
         <div className="justify-between w-full  items-center flex mb-4">
           <h2 className="font-bold text-xl">게시글</h2>
-          <BtnSmall className="text-white">글쓰기</BtnSmall>
+          <Link href="/forum/post" className="">
+            <BtnSmall className="text-white ">글쓰기</BtnSmall>
+          </Link>
         </div>
         <div className="flex w-full h-11 justify-center items-center gap-8 mb-4">
           <InputBox
-            className="w-full"
+            className="w-full h-10 rounded-2xl p-6"
             placeholder="검색할 상품을 입력해주세요"
           />
           <DropDown />
