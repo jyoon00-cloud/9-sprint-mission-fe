@@ -1,8 +1,6 @@
-"use client";
 
 import { BtnSmall } from "@/components/ui/button";
 import InputBox from "@/components/ui/inputBox";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import CommentList from "@/components/ui/commentList";
 

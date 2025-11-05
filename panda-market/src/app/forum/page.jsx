@@ -1,4 +1,3 @@
-"use client";
 import { BtnSmall } from "@/components/ui/button";
 import { BestCard, CardList } from "@/components/ui/card";
 import DropDown from "@/components/ui/dropdown copy";
@@ -9,7 +8,7 @@ export default function ForumHome() {
   return (
     <div className="w-auto">
       <div className="m-20">
-        <h2>베스트 게시글</h2>
+        <h2 className="font-bold text-xl text-gray-900">베스트 게시글</h2>
         <div className="flex">
           <BestCard />
           <BestCard />
@@ -32,9 +31,6 @@ export default function ForumHome() {
           <DropDown />
         </div>
         <div className="">
-          <CardList />
-          <CardList />
-          <CardList />
           <CardList />
         </div>
       </div>
