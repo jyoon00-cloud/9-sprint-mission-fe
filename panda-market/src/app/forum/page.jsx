@@ -7,7 +7,7 @@ import ForumList from "@/components/ui/forumList";
 export default async function ForumHome() {
   const initialArticlesData = await getArticles({ orderBy: "recent" });
   return (
-    <div className="w-auto">
+    <div className="w-full max-w-400 ">
       <div className="m-20">
         <h2 className="font-bold text-xl text-gray-900">베스트 게시글</h2>
         <div className="flex">
@@ -16,7 +16,7 @@ export default async function ForumHome() {
           <BestCard />
         </div>
       </div>
-      <div className="flex flex-col m-10">
+      <div className="w-full max-w-400 flex flex-col m-10">
         {/* 게시글 목록 */}
         <div className="justify-between w-full  items-center flex mb-4">
           <h2 className="font-bold text-xl">게시글</h2>

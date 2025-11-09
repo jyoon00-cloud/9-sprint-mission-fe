@@ -45,4 +45,5 @@ export async function postComments(id, data = {}) {
 export async function getComments(id) {
   const res = await api.get(`/articles/${id}/comments`);
   return res.data;
+  
 }
