@@ -1,4 +1,3 @@
-import { getArticles } from "@/lib/api/article";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -23,11 +22,10 @@ export function BestCard() {
   );
 }
 
-export async function CardList() {
-  const articles = await getArticles();
+export function CardList({ articles = [] }) {
   return (
     <div>
-      {articles.data.map((article) => (
+      {articles.map((article) => (
         <Link
           href={`/forum/${article.id}`}
           key={article.id}
@@ -54,6 +52,7 @@ export async function CardList() {
                 {new Date(article.createdAt).toLocaleDateString()}
               </p>
             </div>
+
             <div>
               <p className="text-gray-500">♡ 999+ </p>
             </div>

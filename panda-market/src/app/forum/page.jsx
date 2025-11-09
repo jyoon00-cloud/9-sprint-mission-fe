@@ -1,10 +1,11 @@
 import { BtnSmall } from "@/components/ui/button";
 import { BestCard, CardList } from "@/components/ui/card";
-import DropDown from "@/components/ui/dropdown copy";
-import InputBox from "@/components/ui/inputBox";
 import Link from "next/link";
+import { getArticles } from "@/lib/api/article";
+import ForumList from "@/components/ui/forumList";
 
-export default function ForumHome() {
+export default async function ForumHome() {
+  const initialArticlesData = await getArticles({ orderBy: "recent" });
   return (
     <div className="w-auto">
       <div className="m-20">
@@ -23,16 +24,7 @@ export default function ForumHome() {
             <BtnSmall className="text-white ">글쓰기</BtnSmall>
           </Link>
         </div>
-        <div className="flex w-full h-11 justify-center items-center gap-8 mb-4">
-          <InputBox
-            className="w-full h-10 rounded-2xl p-6"
-            placeholder="검색할 상품을 입력해주세요"
-          />
-          <DropDown />
-        </div>
-        <div className="">
-          <CardList />
-        </div>
+        <ForumList initialArticles={initialArticlesData.data || []} />
       </div>
     </div>
   );

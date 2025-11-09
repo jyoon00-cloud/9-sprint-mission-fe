@@ -1,35 +1,10 @@
-"use client";
-import { useState } from "react";
-// 완성후 대체
-function Dropdown({ onSortSelection }) {
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  const toggleDropdown = () => {
-    setIsDropdownVisible(!isDropdownVisible);
-  };
-
+export default function Dropdown({ value, onChange }) {
   return (
-    <div>
-      <button onClick={toggleDropdown}>{onSortSelection}</button>
-      {isDropdownVisible && (
-        <div>
-          <div
-            onClick={() => {
-              onSortSelection("최신순");
-              setIsDropdownVisible(false);
-            }}
-          >
-            최신순
-          </div>
-          <div
-            onClick={() => {
-              onSortSelection("인기순");
-              setIsDropdownVisible(false);
-            }}
-          >
-            인기순
-          </div>
-        </div>
-      )}
+    <div className="relative flex items-center w-32.5 h-10.5 border bg-white border-gray-200 border-solid pl-8 pr-6 rounded-2xl overflow-hidden">
+      <select className="w-full h-full" value={value} onChange={onChange}>
+        <option value="recent">최신순</option>
+        <option value="likes">좋아요순</option>
+      </select>
     </div>
   );
 }

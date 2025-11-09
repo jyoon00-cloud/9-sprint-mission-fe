@@ -1,5 +1,4 @@
-
-import { BtnSmall } from "@/components/ui/button";
+import { BtnMedium, BtnSmall } from "@/components/ui/button";
 import InputBox from "@/components/ui/inputBox";
 import Image from "next/image";
 import CommentList from "@/components/ui/commentList";
@@ -48,8 +47,14 @@ export default function ForumDetail({}) {
       </div>
       <div>
         <CommentList />
-        <CommentList />
-        <CommentList />
+      </div>
+      <div className="items-center">
+        <BtnMedium>
+          <div className="flex items-center justify-center">
+            <p>목록으로 돌아가기</p>
+            <Image src="/ic_back" alt="" width={19} height={16} />
+          </div>
+        </BtnMedium>
       </div>
     </div>
   );

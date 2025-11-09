@@ -1,0 +1,58 @@
+"use client";
+import { useState, useEffect } from "react";
+import { CardList } from "./card";
+import Dropdown from "./dropdown";
+import InputBox from "./inputBox";
+import { getArticles } from "@/lib/api/article";
+
+export default function ForumList({ initialArticles = [] }) {
+  const [searchResults, setSearchResults] = useState(null);
+  const [searchWord, setSearchWord] = useState("");
+  const [sortOrder, setSortOrder] = useState("recent");
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const params = {
+          word: searchWord,
+          orderBy: sortOrder,
+        };
+        const data = await getArticles(params);
+        setSearchResults(data.data || []);
+      } catch (error) {
+        console.error("게시글 불러오기 실패", error);
+        setSearchResults([]);
+      }
+    };
+    const isSearching = Boolean(searchWord);
+    const isDefaultSort = sortOrder === "recent";
+
+    if (isSearching || !isDefaultSort) {
+      fetchArticles();
+    } else {
+      setSearchResults(null);
+    }
+  }, [searchWord, sortOrder]);
+  const displayArticles =
+    searchResults !== null ? searchResults : initialArticles;
+
+  return (
+    <>
+      <div className="flex w-full h-11 justify-center items-center gap-8 mb-4">
+        <InputBox
+          className="w-full h-10 rounded-2xl p-6"
+          placeholder="검색할 상품을 입력해주세요"
+          value={searchWord}
+          onChange={(e) => setSearchWord(e.target.value)}
+        />
+        <Dropdown
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+        />
+      </div>
+      <div>
+        <CardList articles={displayArticles} />
+      </div>
+    </>
+  );
+}
