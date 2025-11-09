@@ -38,9 +38,9 @@ export default function ForumList({ initialArticles = [] }) {
 
   return (
     <>
-      <div className="flex w-full h-11 justify-center items-center gap-8 mb-4">
+      <div className="max-w-300 flex w-full h-11 justify-center items-center gap-8 mb-4">
         <InputBox
-          className="w-full h-10 rounded-2xl p-6"
+          className="flex-1 h-10 rounded-2xl p-6"
           placeholder="검색할 상품을 입력해주세요"
           value={searchWord}
           onChange={(e) => setSearchWord(e.target.value)}
