@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-export default function InputBox({ value, onChange, ...props }) {
+export default function InputBox({ value, onChange, type = "text", ...props }) {
   const className = twMerge(
     "flex bg-gray-100 w-full border-2.5 text-gray-400 rounded-xl pl-4",
     props.className
@@ -8,7 +8,7 @@ export default function InputBox({ value, onChange, ...props }) {
     <input
       {...props}
       className={className}
-      type="text"
+      type={type}
       value={value}
       onChange={onChange}
     />
