@@ -25,9 +25,9 @@ export default function Header() {
           </div>
         </div>
         <div>
-          <Link href="/login">
-            <BtnSmall className="text-gray-100">로그인</BtnSmall>
-          </Link>
+          <BtnSmall className="text-gray-100">
+            <Link href="/login">로그인</Link>
+          </BtnSmall>
         </div>
       </div>
     </header>
