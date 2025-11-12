@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
-import { CardList } from "./card";
+import { CardList } from "./forumCard";
 import Dropdown from "./dropdown";
-import InputBox from "./inputBox";
+import { InputBox } from "@/components/ui/inputBox";
 import { getArticles } from "@/lib/api/article";
 
 export default function ForumList({ initialArticles = [] }) {

@@ -3,9 +3,16 @@
 import Image from "next/image";
 import { BtnSmall } from "@/components/ui/button";
 import { useState } from "react";
-import InputBox from "./inputBox";
+import { InputBox } from "@/components/ui/inputBox";
+import { usePathname } from "next/navigation";
 
 export default function CommentList({ comments = [], onUpdate, onDelete }) {
+  const pathName = usePathname();
+  const pathImg = pathName.startsWith("/forum/")
+    ? "/img_reply_empty.png"
+    : "/Img_inquiry_empty.png";
+  const pathAlt = pathName.startsWith("/forum/") ? "댓글 없음" : "문의 없음";
+
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [updatedContent, setUpdatedContent] = useState("");
 
@@ -30,20 +37,24 @@ export default function CommentList({ comments = [], onUpdate, onDelete }) {
         <div>
           <Image
             className="mx-auto mt-10"
-            src="/img_reply_empty.png"
-            alt="댓글 없음 아이콘"
+            src={pathImg}
+            alt={pathAlt}
             width={140}
             height={140}
           />
-          <p className="text-center text-gray-500 mt-4">
-            아직 댓글이 없어요,
-            <br />
-            지금 댓글을 달아보세요!
-          </p>
+          {pathName.startsWith("/forum/") ? (
+            <p className="text-center text-gray-500 mt-4">
+              아직 댓글이 없어요,
+              <br />
+              지금 댓글을 달아보세요!
+            </p>
+          ) : (
+            <p className="text-center text-gray-500 mt-4">아직 문의가 없어요</p>
+          )}
         </div>
       ) : (
         comments.map((comment) => (
-          <div key={comment.id} className="mt-4 border-b pb-4">
+          <div key={comment.id} className="mt-4 border-b border-[#E5E7EB] pb-4">
             {editingCommentId === comment.id ? ( // 수정시
               <div>
                 <InputBox
@@ -51,11 +62,27 @@ export default function CommentList({ comments = [], onUpdate, onDelete }) {
                   value={updatedContent}
                   onChange={(e) => setUpdatedContent(e.target.value)}
                 />
-                <div className="flex gap-2 mt-2">
-                  <BtnSmall onClick={() => handleSaveEdit(comment.id)}>
-                    수정 완료
-                  </BtnSmall>
-                  <BtnSmall onClick={handleCancelEdit}>취소</BtnSmall>
+
+                <div className="flex justify-between">
+                  <div className="flex items-center gap-2 mt-2">
+                    <Image
+                      className="bg-gray-300 rounded-full"
+                      src="/panda_ic.png"
+                      alt="아이콘"
+                      width={32}
+                      height={32}
+                    />
+                    <div>
+                      <p>닉네임</p>
+                      <p>{new Date(comment.createdAt).toLocaleDateString()}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 mt-2">
+                    <BtnSmall onClick={() => handleSaveEdit(comment.id)}>
+                      수정 완료
+                    </BtnSmall>
+                    <BtnSmall onClick={handleCancelEdit}>취소</BtnSmall>
+                  </div>
                 </div>
               </div>
             ) : (

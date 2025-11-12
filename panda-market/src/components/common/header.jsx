@@ -19,7 +19,7 @@ export default function Header() {
             <Link href="/forum" className="text-blue-500 m-6">
               자유게시판
             </Link>
-            <Link href="/store" className=" m-6">
+            <Link href="/items" className=" m-6">
               중고마켓
             </Link>
           </div>
