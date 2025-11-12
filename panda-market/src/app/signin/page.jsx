@@ -1,6 +1,6 @@
 "use client";
 import { BtnLarge } from "@/components/ui/button";
-import InputBox from "@/components/ui/inputBox";
+import { PwInput, InputBox } from "@/components/ui/inputBox";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -26,7 +26,7 @@ export default function Signin() {
       <div className="w-full">
         <p>비밀번호</p>
         <div className="flex relative">
-          <InputBox
+          <PwInput
             className="h-14 pr-11"
             placeholder="비밀번호를 입력해주세요."
             type={pwVisibility ? "text" : "password"}
@@ -55,7 +55,7 @@ export default function Signin() {
       <div className="w-full">
         <p>비밀번호 확인</p>
         <div className="flex relative">
-          <InputBox
+          <PwInput
             className="h-14 pr-11"
             placeholder="비밀번호를 다시 한 번 입력해주세요."
             type={checkVisibility ? "text" : "password"}
