@@ -1,8 +1,8 @@
 "use client";
 import { BtnSmall } from "@/components/ui/button";
-import InputBox from "@/components/ui/inputBox";
+import { InputBox } from "@/components/ui/inputBox";
 import { useState, useEffect } from "react";
-import { patchArticle, getArticlebyId } from "@/lib/api/article";
+import { patchArticle, getArticleById } from "@/lib/api/article";
 import { useRouter, useParams } from "next/navigation";
 
 export default function EditForum() {
@@ -19,7 +19,7 @@ export default function EditForum() {
     if (!id) return;
     const fetchArticle = async () => {
       try {
-        const articleData = await getArticlebyId(id);
+        const articleData = await getArticleById(id);
         setTitle(articleData.title);
         setContent(articleData.content);
       } catch (error) {

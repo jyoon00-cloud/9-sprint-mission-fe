@@ -1,4 +1,4 @@
-import { getArticlebyId, getComments } from "@/lib/api/article";
+import { getArticleById, getComments } from "@/lib/api/article";
 import { notFound } from "next/navigation";
 import ArticleDetail from "@/components/ui/articleDetail";
 
@@ -9,7 +9,7 @@ export default async function ForumDetail(props) {
   let commentsData;
 
   try {
-    articleData = await getArticlebyId(id);
+    articleData = await getArticleById(id);
     commentsData = await getComments(id);
   } catch (error) {
     console.error("데이터 불러오기 실패:", error);

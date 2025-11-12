@@ -1,6 +1,6 @@
 "use client";
 import { BtnSmall } from "@/components/ui/button";
-import InputBox from "@/components/ui/inputBox";
+import { InputBox } from "@/components/ui/inputBox";
 import { useState } from "react";
 import { postArticles } from "@/lib/api/article";
 import { useRouter } from "next/navigation";

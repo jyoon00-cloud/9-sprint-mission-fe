@@ -1,5 +1,5 @@
 import { BtnSmall } from "@/components/ui/button";
-import { BestCard, CardList } from "@/components/ui/card";
+import { BestCard, CardList } from "@/components/ui/forumCard";
 import Link from "next/link";
 import { getArticles } from "@/lib/api/article";
 import ForumList from "@/components/ui/forumList";
