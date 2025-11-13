@@ -1,6 +1,6 @@
 "use client";
 import { BtnLarge } from "@/components/ui/button";
-import { PwInput, InputBox } from "@/components/ui/inputBox";
+import { SmallInput, InputBox } from "@/components/ui/inputBox";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -28,6 +28,7 @@ export default function SignUp() {
       router.push("/items");
     }
   }, [router]);
+
   useEffect(() => {
     if (values.passwordRepeat && values.password !== values.passwordRepeat) {
       setPasswordError("비밀번호가 일치하지 않아요.");
@@ -122,7 +123,7 @@ export default function SignUp() {
         <div className="w-full">
           <p>비밀번호</p>
           <div className="flex relative">
-            <PwInput
+            <SmallInput
               className="h-14 pr-11"
               placeholder="비밀번호를 입력해주세요."
               type={pwVisibility ? "text" : "password"}
@@ -154,7 +155,7 @@ export default function SignUp() {
         <div className="w-full">
           <p>비밀번호 확인</p>
           <div className="flex relative">
-            <PwInput
+            <SmallInput
               className="h-14 pr-11"
               placeholder="비밀번호를 다시 한 번 입력해주세요."
               type={checkVisibility ? "text" : "password"}
