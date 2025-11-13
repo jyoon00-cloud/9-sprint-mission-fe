@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { CardList } from "./forumCard";
 import Dropdown from "./dropdown";
-import { InputBox } from "@/components/ui/inputBox";
+import { SmallInput } from "@/components/ui/inputBox";
 import { getArticles } from "@/lib/api/article";
 
 export default function ForumList({ initialArticles = [] }) {
@@ -39,7 +39,7 @@ export default function ForumList({ initialArticles = [] }) {
   return (
     <>
       <div className="max-w-300 flex w-full h-11 justify-center items-center gap-8 mb-4">
-        <InputBox
+        <SmallInput
           className="flex-1 h-10 rounded-2xl p-6"
           placeholder="검색할 상품을 입력해주세요"
           value={searchWord}
