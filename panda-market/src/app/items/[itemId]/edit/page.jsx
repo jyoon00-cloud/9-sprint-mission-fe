@@ -9,19 +9,23 @@ export default function EditProducts() {
   const router = useRouter();
   const params = useParams();
   const { itemId } = params;
-
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [tags, setTags] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const isDisabled = title.trim() === "" || content.trim() === "" || isLoading;
+  const isDisabled =
+    name.trim() === "" || description.trim() === "" || isLoading;
 
   useEffect(() => {
     if (!itemId) return;
     const fetchProduct = async () => {
       try {
         const productData = await getProductsById(itemId);
-        setTitle(productData.title);
-        setContent(productData.content);
+        setName(productData.name);
+        setDescription(productData.description);
+        setPrice(productData.price);
+        setTags(productData.tags.join(", "));
       } catch (error) {
         console.error("게시글 로딩 실패:", error);
         alert("게시글 로딩 실패");
@@ -39,7 +43,15 @@ export default function EditProducts() {
     setIsLoading(true);
 
     try {
-      const updatedProduct = { title, content };
+      const updatedProduct = {
+        name,
+        description,
+        price: Number(price),
+        tags: tags
+          .split(",")
+          .map((tag) => tag.trim())
+          .filter((tag) => tag.length > 0),
+      };
       await patchProduct(itemId, updatedProduct);
       router.push(`/items/${itemId}`);
     } catch (error) {
@@ -63,21 +75,40 @@ export default function EditProducts() {
         </BtnSmall>
       </div>
       <div>
-        <p>*제목</p>
+        <p>*상품명</p>
         <InputBox
-          placeholder="제목을 입력해주세요"
+          placeholder="제목을 입력해주세요(필수)"
           className="h-14"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         ></InputBox>
       </div>
       <div>
-        <p>*내용</p>
+        <p>*가격</p>
         <InputBox
-          placeholder="내용을 입력해주세요"
+          type="number"
+          placeholder="가격을 입력해주세요(필수)"
+          className="h-14"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        ></InputBox>
+      </div>
+      <div>
+        <p>상품 설명</p>
+        <InputBox
+          placeholder="상품 설명을 입력해주세요"
           className="h-71"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        ></InputBox>
+      </div>
+      <div>
+        <p>태그</p>
+        <InputBox
+          placeholder="태그를 입력해주세요(쉼표로 구분)"
+          className="h-14"
+          value={tags}
+          onChange={(e) => setTags(e.target.value)}
         ></InputBox>
       </div>
     </div>
