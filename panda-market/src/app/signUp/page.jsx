@@ -24,7 +24,7 @@ export default function SignUp() {
   });
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("accessToken")) {
       router.push("/items");
     }
   }, [router]);
@@ -66,7 +66,7 @@ export default function SignUp() {
       };
       const response = await postSignUp(SignUpData);
 
-      localStorage.setItem("token", response.accessToken);
+      localStorage.setItem("accessToken", response.accessToken);
       router.push("/items");
     } catch (error) {
       const errorMessage =

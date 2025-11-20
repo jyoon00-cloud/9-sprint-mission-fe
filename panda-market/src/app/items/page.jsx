@@ -1,5 +1,4 @@
-import { BtnSmall } from "@/components/ui/button";
-import Link from "next/link";
+
 import { getProducts } from "@/lib/api/products";
 import ItemList from "@/components/ui/itemList";
 

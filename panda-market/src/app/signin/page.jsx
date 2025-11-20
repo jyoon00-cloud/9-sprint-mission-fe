@@ -14,12 +14,13 @@ export default function SignIn() {
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [signInError, setSignInError] = useState(false);
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("accessToken")) {
       router.push("/items");
     }
   }, [router]);
@@ -42,11 +43,12 @@ export default function SignIn() {
     setIsLoading(true);
     try {
       const response = await postSignIn(values);
-      localStorage.setItem("token", response.token);
+      localStorage.setItem("accessToken", response.accessToken);
       router.push("/items");
     } catch (error) {
       setModalMessage("로그인에 실패했습니다. 다시 시도해주세요.");
       setIsModalOpen(true);
+      setSignInError(true);
     } finally {
       setIsLoading(false);
     }
@@ -81,6 +83,9 @@ export default function SignIn() {
             value={values.email}
             onChange={handleChange}
           />
+          {signInError && (
+            <p className="text-red-500 text-sm mt-1">이메일을 확인해 주세요</p>
+          )}
         </div>
         <div className="w-full">
           <p>비밀번호</p>
@@ -113,6 +118,12 @@ export default function SignIn() {
               )}
             </div>
           </div>
+          {signInError && (
+            <p className="text-red-500 text-sm mt-1">
+              {" "}
+              비밀번호를 확인해 주세요
+            </p>
+          )}
         </div>
         <BtnLarge type="submit" disabled={isLoading}>
           로그인

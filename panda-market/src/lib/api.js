@@ -1,8 +1,6 @@
 import axios from "axios";
 
-const BaseUrl = "http://localhost:4000";
+const BASE_URL = "https://panda-market-api.vercel.app";
 const api = axios.create({
-  baseURL: BaseUrl,
+  baseURL: BASE_URL,
 });
-
-export default api;

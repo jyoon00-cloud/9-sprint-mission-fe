@@ -6,7 +6,12 @@ import Image from "next/image";
 import CommentList from "@/components/ui/commentList";
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { deleteProduct, postComments } from "@/lib/api/products";
+import {
+  deleteProduct,
+  postComments,
+  postFavorite,
+  deleteFavorite,
+} from "@/lib/api/products";
 import { deleteComment, patchComment } from "@/lib/api/comment";
 import { TagBox } from "./tag";
 
@@ -17,8 +22,9 @@ export default function ProductDetail({ initialProduct, initialComments }) {
 
   const [product, setProduct] = useState(initialProduct);
   const [comments, setComments] = useState(initialComments);
-
   const [newComment, setNewComment] = useState("");
+  const [isFavorite, setIsFavorite] = useState(product.isFavorite);
+  const [favorites, setFavorites] = useState(product.favoriteCount);
   const [isLoading, setIsLoading] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -50,6 +56,32 @@ export default function ProductDetail({ initialProduct, initialComments }) {
     } catch (error) {
       console.error("댓글 등록 실패:", error);
       alert("댓글 등록 실패");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleFavorite = async () => {
+    if (isLoading) return;
+    setIsLoading(true);
+    try {
+      if (isFavorite) {
+        await deleteFavorite(itemId);
+        setFavorites((prev) => prev - 1);
+      } else {
+        await postFavorite(itemId);
+        setFavorites((prev) => prev + 1);
+      }
+      setIsFavorite(!isFavorite);
+      setProduct((prevProduct) => ({
+        ...prevProduct,
+        favoriteCount: isFavorite
+          ? prevProduct.favoriteCount - 1
+          : prevProduct.favoriteCount + 1,
+      }));
+    } catch (error) {
+      console.error("좋아요 처리 실패:", error);
+      alert("좋아요 처리 실패");
     } finally {
       setIsLoading(false);
     }
@@ -173,9 +205,12 @@ export default function ProductDetail({ initialProduct, initialComments }) {
                     </div>
                   </div>
                   <div className="border-l border-gray-200">
-                    <button className="flex ml-3 gap-2 p-4 items-center justify-center rounded-[35px] h-10 text-gray-500 border-2 border-gray-200">
+                    <button
+                      className="flex ml-3 gap-2 p-4 items-center justify-center rounded-[35px] h-10 text-gray-500 border-2 border-gray-200"
+                      onClick={handleFavorite}
+                    >
                       <p className="text-2xl font-light">♡ </p>
-                      <p>0000+ </p>
+                      <p>{product.favoriteCount} </p>
                     </button>
                   </div>
                 </div>

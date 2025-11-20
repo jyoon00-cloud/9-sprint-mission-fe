@@ -46,3 +46,13 @@ export async function getComments(productId) {
   const res = await api.get(`/products/${productId}/comments`);
   return res.data;
 }
+
+export async function postFavorite(productId) {
+  const res = await api.post(`/products/${productId}/favorite`);
+  return res.data;
+}
+
+export async function deleteFavorite(productId) {
+  const res = await api.delete(`/products/${productId}/favorite`);
+  return res.data;
+}

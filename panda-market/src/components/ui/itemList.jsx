@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { ItemCardList } from "./itemCard";
 import Dropdown from "./dropdown";
-import { InputBox } from "@/components/ui/inputBox";
+import {  SmallInput } from "@/components/ui/inputBox";
 import { getProducts } from "@/lib/api/products";
 import { BtnSmall } from "./button";
 import Link from "next/link";
@@ -52,7 +52,7 @@ export default function ItemList({ initialProducts = [] }) {
               height={20}
               className="absolute top-1/2 left-3 -translate-y-1/2 pointer-events-none"
             />
-            <InputBox
+            <SmallInput
               className="flex-1 h-10 rounded-2xl w-80 pl-10"
               placeholder="검색할 상품을 입력해주세요"
               value={searchWord}
