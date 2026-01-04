@@ -3,7 +3,7 @@ import { BtnLarge } from "@/components/ui/button";
 import { SmallInput, InputBox } from "@/components/ui/inputBox";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent, type ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
 import { postSignUp } from "@/lib/api/auth";
 import Modal from "@/components/ui/modal";
@@ -13,7 +13,7 @@ export default function SignUp() {
   const [pwVisibility, setPwVisibility] = useState(false);
   const [checkVisibility, setCheckVisibility] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  const [passwordError, setPasswordError] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [values, setValues] = useState({
@@ -35,7 +35,9 @@ export default function SignUp() {
     } else setPasswordError("");
   }, [values.password, values.passwordRepeat]);
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setValues((preValues) => ({
       ...preValues,
@@ -43,7 +45,7 @@ export default function SignUp() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (passwordError) {
       setModalMessage("비밀번호가 일치하지 않습니다.");
@@ -68,7 +70,7 @@ export default function SignUp() {
 
       localStorage.setItem("accessToken", response.accessToken);
       router.push("/items");
-    } catch (error) {
+    } catch (error: any) {
       const errorMessage =
         error.response?.data?.message || "회원가입에 실패했습니다.";
       setModalMessage(errorMessage);

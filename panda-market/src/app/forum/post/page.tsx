@@ -1,7 +1,7 @@
 "use client";
 import { BtnSmall } from "@/components/ui/button";
 import { InputBox } from "@/components/ui/inputBox";
-import { useState } from "react";
+import React, { useState } from "react";
 import { postArticles } from "@/lib/api/article";
 import { useRouter } from "next/navigation";
 
@@ -50,7 +50,9 @@ export default function WriteForum() {
           placeholder="내용을 입력해주세요"
           className="h-71"
           value={content}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+            setContent(e.target.value)
+          }
         ></InputBox>
       </div>
     </div>

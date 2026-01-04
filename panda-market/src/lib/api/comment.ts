@@ -1,11 +1,13 @@
 import api from "../api";
-
-export async function patchComment(commentId, data = {}) {
-  const res = await api.patch(`/comments/${commentId}`, data);
+import type { Comment } from "@/types";
+export async function patchComment(
+  commentId: number,
+  data: { content: string }
+): Promise<Comment> {
+  const res = await api.patch<Comment>(`/comments/${commentId}`, data);
   return res.data;
 }
 
-export async function deleteComment(commentId) {
+export async function deleteComment(commentId: number): Promise<void> {
   const res = await api.delete(`/comments/${commentId}`);
-  return res.data;
 }

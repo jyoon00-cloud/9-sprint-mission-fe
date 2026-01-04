@@ -1,5 +1,5 @@
 export interface User {
-  id: string;
+  id: number;
   email: string;
   nickname: string;
   image?: string | null;
@@ -8,8 +8,9 @@ export interface User {
 }
 
 export interface Product {
-  id: string;
-  ownerId: string;
+  id: number;
+  uploaderId: number;
+  uploader: User;
   name: string;
   description: string;
   price: number;
@@ -22,11 +23,12 @@ export interface Product {
 }
 
 export interface Article {
-  id: string;
-  writerId: string;
+  id: number;
+  uploaderId: number;
+  uploader: User;
   title: string;
   content: string;
-  image?: string | null;
+  images: string[];
   createdAt: string;
   updatedAt: string;
   favoriteCount: number;
@@ -34,19 +36,31 @@ export interface Article {
 }
 
 export interface Comment {
-  id: string;
-  writerId: string;
-  articleId?: string | null;
-  productId?: string | null;
+  id: number;
+  authorId: number;
+  author: User;
+  articleId?: number | null;
+  productId?: number | null;
   content: string;
   createdAt: string;
   updatedAt: string;
 }
 
 export interface Like {
-  id: string;
-  userId: string;
-  productId?: string | null;
-  articleId?: string | null;
+  id: number;
+  userId: number;
+  productId?: number | null;
+  articleId?: number | null;
   createdAt: string;
+}
+
+export type SignUpInput = Pick<User, "email" | "nickname"> & {
+  password: string;
+};
+export type SignInInput = Pick<User, "email"> & { password: string };
+
+export interface AuthResponse {
+  accessToken: string;
+  refreshToken: string;
+  user: User;
 }

@@ -2,19 +2,31 @@
 import { useState, useEffect } from "react";
 import { ItemCardList } from "./itemCard";
 import Dropdown from "./dropdown";
-import {  SmallInput } from "@/components/ui/inputBox";
+import { SmallInput } from "@/components/ui/inputBox";
 import { getProducts } from "@/lib/api/products";
 import { BtnSmall } from "./button";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function ItemList({ initialProducts = [] }) {
-  const [searchResults, setSearchResults] = useState(null);
-  const [searchWord, setSearchWord] = useState("");
-  const [sortOrder, setSortOrder] = useState("recent");
+import type { Product } from "@/types";
+
+interface ItemListProps {
+  initialProducts?: Product[];
+}
+export default function ItemList({ initialProducts = [] }: ItemListProps) {
+  const [searchResults, setSearchResults] = useState<Product[] | null>(null);
+  const [searchWord, setSearchWord] = useState<string>("");
+  const [sortOrder, setSortOrder] = useState<"recent" | "likes">("recent");
 
   useEffect(() => {
     const fetchProducts = async () => {
+      const isSearching = Boolean(searchWord);
+      const isDefaultSort = sortOrder === "recent";
+      if (!isSearching && isDefaultSort) {
+        setSearchResults(null);
+        return;
+      }
+
       try {
         const params = {
           word: searchWord,
@@ -27,15 +39,9 @@ export default function ItemList({ initialProducts = [] }) {
         setSearchResults([]);
       }
     };
-    const isSearching = Boolean(searchWord);
-    const isDefaultSort = sortOrder === "recent";
-
-    if (isSearching || !isDefaultSort) {
-      fetchProducts();
-    } else {
-      setSearchResults(null);
-    }
+    fetchProducts();
   }, [searchWord, sortOrder]);
+
   const displayProducts =
     searchResults !== null ? searchResults : initialProducts;
 
@@ -56,7 +62,9 @@ export default function ItemList({ initialProducts = [] }) {
               className="flex-1 h-10 rounded-2xl w-80 pl-10"
               placeholder="검색할 상품을 입력해주세요"
               value={searchWord}
-              onChange={(e) => setSearchWord(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setSearchWord(e.target.value)
+              }
             />
           </div>
           <Link href="/items/registration" className=" h-10  ">
@@ -67,7 +75,9 @@ export default function ItemList({ initialProducts = [] }) {
           <Dropdown
             className=" h-10 "
             value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              setSortOrder(e.target.value as "recent" | "likes")
+            }
           />
         </div>
       </div>

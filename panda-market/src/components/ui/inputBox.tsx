@@ -1,31 +1,24 @@
 import { twMerge } from "tailwind-merge";
-export function InputBox({ value, onChange, type = "text", ...props }) {
-  const className = twMerge(
+
+type InputBoxProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+  className?: string;
+};
+export function InputBox({ className, ...props }: InputBoxProps) {
+  const mergedClass = twMerge(
     "flex flex-wrap bg-gray-100 w-full border-2.5 resize-none whitespace-preline  text-gray-400 rounded-xl p-4",
-    props.className
+    className
   );
-  return (
-    <textarea
-      {...props}
-      className={className}
-      type={type}
-      value={value}
-      onChange={onChange}
-    />
-  );
+  return <textarea className={mergedClass} {...props} />;
 }
-export function SmallInput({ value, onChange, type = "text", ...props }) {
-  const className = twMerge(
+
+type SmallInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  className?: string;
+};
+
+export function SmallInput({ className, ...props }: SmallInputProps) {
+  const mergedClass = twMerge(
     "flex flex-wrap bg-gray-100 w-full border-2.5  text-gray-400 rounded-xl p-4",
-    props.className
+    className
   );
-  return (
-    <input
-      {...props}
-      className={className}
-      type={type}
-      value={value}
-      onChange={onChange}
-    />
-  );
+  return <input className={mergedClass} {...props} />;
 }

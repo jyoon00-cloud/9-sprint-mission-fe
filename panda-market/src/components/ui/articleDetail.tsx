@@ -4,28 +4,36 @@ import { BtnMedium, BtnSmall } from "@/components/ui/button";
 import { InputBox } from "@/components/ui/inputBox";
 import Image from "next/image";
 import CommentList from "@/components/ui/commentList";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { deleteArticle, postComments } from "@/lib/api/article";
 import { deleteComment, patchComment } from "@/lib/api/comment";
+import type { Article, Comment } from "@/types";
 
-export default function ArticleDetail({ initialArticle, initialComments }) {
+interface ArticleDetailProps {
+  initialArticle: Article;
+  initialComments: Comment[];
+}
+export default function ArticleDetail({
+  initialArticle,
+  initialComments,
+}: ArticleDetailProps) {
   const router = useRouter();
-  const params = useParams();
-  const id = params.id;
+  const params = useParams<{ id: string }>();
+  const articleId = Number(params.id);
 
-  const [article, setArticle] = useState(initialArticle);
-  const [comments, setComments] = useState(initialComments);
+  const [article, setArticle] = useState<Article>(initialArticle);
+  const [comments, setComments] = useState<Comment[]>(initialComments);
 
-  const [newComment, setNewComment] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [newComment, setNewComment] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
   const handleDeleteArticle = async () => {
     if (confirm("게시글을 삭제하시겠습니까?")) {
       setIsLoading(true);
       try {
-        await deleteArticle(id);
+        await deleteArticle(articleId);
         alert("게시글이 삭제되었습니다.");
         router.push("/forum");
       } catch (error) {
@@ -41,7 +49,7 @@ export default function ArticleDetail({ initialArticle, initialComments }) {
     if (newComment.trim() === "" || isLoading) return;
     setIsLoading(true);
     try {
-      const postedComment = await postComments(id, {
+      const postedComment = await postComments(articleId, {
         content: newComment,
       });
       setComments((prevComments) => [...prevComments, postedComment]);
@@ -54,7 +62,7 @@ export default function ArticleDetail({ initialArticle, initialComments }) {
     }
   };
 
-  const handleUpdateComment = async (commentId, content) => {
+  const handleUpdateComment = async (commentId: number, content: string) => {
     try {
       const updatedComment = await patchComment(commentId, { content });
       setComments((prevComments) =>
@@ -68,7 +76,7 @@ export default function ArticleDetail({ initialArticle, initialComments }) {
     }
   };
 
-  const handleDeleteComment = async (commentId) => {
+  const handleDeleteComment = async (commentId: number) => {
     if (confirm("댓글을 삭제하시겠습니까?")) {
       try {
         await deleteComment(commentId);
@@ -103,7 +111,7 @@ export default function ArticleDetail({ initialArticle, initialComments }) {
               <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg z-10">
                 <button
                   className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  onClick={() => router.push(`/forum/${id}/edit`)}
+                  onClick={() => router.push(`/forum/${articleId}/edit`)}
                 >
                   수정하기
                 </button>
@@ -148,7 +156,9 @@ export default function ArticleDetail({ initialArticle, initialComments }) {
             placeholder="댓글을 입력해주세요"
             className="h-26 flex-col "
             value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+              setNewComment(e.target.value)
+            }
           />
         </div>
         <div className="flex justify-end mt-2 ">

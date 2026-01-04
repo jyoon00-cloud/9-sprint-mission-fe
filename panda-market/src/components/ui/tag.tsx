@@ -1,6 +1,10 @@
 import { twMerge } from "tailwind-merge";
 
-export function TagBox({ children, ...props }) {
+interface TagBoxProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+}
+
+export function TagBox({ children, ...props }: TagBoxProps) {
   const className = twMerge(
     "bg-gray-100 block border-none rounded-[26px] items-center justify-center w-auto leading-6.5 py-1.5 px-9",
     props.className

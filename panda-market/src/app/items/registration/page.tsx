@@ -1,6 +1,6 @@
 "use client";
 import { BtnSmall } from "@/components/ui/button";
-import { InputBox } from "@/components/ui/inputBox";
+import { InputBox, SmallInput } from "@/components/ui/inputBox";
 import { useState } from "react";
 import { postProducts } from "@/lib/api/products";
 import { useRouter } from "next/navigation";
@@ -57,13 +57,13 @@ export default function WriteItem() {
       </div>
       <div>
         <p>*가격</p>
-        <InputBox
+        <SmallInput
           type="number"
           placeholder="가격을 입력해주세요(필수)"
           className="h-14"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-        ></InputBox>
+        ></SmallInput>
       </div>
       <div>
         <p>상품 설명</p>

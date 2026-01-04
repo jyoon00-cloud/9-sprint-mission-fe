@@ -14,19 +14,29 @@ import {
 } from "@/lib/api/products";
 import { deleteComment, patchComment } from "@/lib/api/comment";
 import { TagBox } from "./tag";
+import type { Product, Comment as CommentType } from "@/types";
 
-export default function ProductDetail({ initialProduct, initialComments }) {
+interface ProductDetailProps {
+  initialProduct: Product;
+  initialComments: CommentType[];
+}
+export default function ProductDetail({
+  initialProduct,
+  initialComments,
+}: ProductDetailProps) {
   const router = useRouter();
-  const params = useParams();
-  const itemId = params.itemId;
+  const params = useParams<{ itemId: string }>();
+  const itemId = Number(params.itemId);
 
-  const [product, setProduct] = useState(initialProduct);
-  const [comments, setComments] = useState(initialComments);
-  const [newComment, setNewComment] = useState("");
-  const [isFavorite, setIsFavorite] = useState(product.isFavorite);
-  const [favorites, setFavorites] = useState(product.favoriteCount);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [product, setProduct] = useState<Product>(initialProduct);
+  const [comments, setComments] = useState<CommentType[]>(
+    initialComments as unknown as CommentType[]
+  );
+  const [newComment, setNewComment] = useState<string>("");
+  const [isFavorite, setIsFavorite] = useState<boolean>(product.isFavorite);
+  const [favorites, setFavorites] = useState<number>(product.favoriteCount);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
   const handleDeleteProduct = async () => {
     if (confirm("게시글을 삭제하시겠습니까?")) {
@@ -48,10 +58,13 @@ export default function ProductDetail({ initialProduct, initialComments }) {
     if (newComment.trim() === "" || isLoading) return;
     setIsLoading(true);
     try {
-      const postedComment = await postComments(itemId, {
+      const postedComment = (await postComments(itemId, {
         content: newComment,
-      });
-      setComments((prevComments) => [...prevComments, postedComment]);
+      })) as unknown as CommentType;
+      setComments((prevComments: CommentType[]) => [
+        ...prevComments,
+        postedComment,
+      ]);
       setNewComment("");
     } catch (error) {
       console.error("댓글 등록 실패:", error);
@@ -87,12 +100,12 @@ export default function ProductDetail({ initialProduct, initialComments }) {
     }
   };
 
-  const handleUpdateComment = async (commentId, content) => {
+  const handleUpdateComment = async (commentId: number, content: string) => {
     try {
       const updatedComment = await patchComment(commentId, { content });
       setComments((prevComments) =>
         prevComments.map((comment) =>
-          comment.Id === commentId ? updatedComment : comment
+          comment.id === commentId ? updatedComment : comment
         )
       );
     } catch (error) {
@@ -101,7 +114,7 @@ export default function ProductDetail({ initialProduct, initialComments }) {
     }
   };
 
-  const handleDeleteComment = async (commentId) => {
+  const handleDeleteComment = async (commentId: number) => {
     if (confirm("댓글을 삭제하시겠습니까?")) {
       try {
         await deleteComment(commentId);
@@ -227,7 +240,9 @@ export default function ProductDetail({ initialProduct, initialComments }) {
             placeholder="댓글을 개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
             className="h-26 flex-col "
             value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+              setNewComment(e.target.value)
+            }
           />
         </div>
         <div className="flex justify-end mt-2 ">

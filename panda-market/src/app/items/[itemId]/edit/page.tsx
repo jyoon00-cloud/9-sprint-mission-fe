@@ -1,14 +1,15 @@
 "use client";
 import { BtnSmall } from "@/components/ui/button";
-import { InputBox } from "@/components/ui/inputBox";
+import { InputBox, SmallInput } from "@/components/ui/inputBox";
 import { useState, useEffect } from "react";
 import { patchProduct, getProductsById } from "@/lib/api/products";
 import { useRouter, useParams } from "next/navigation";
 
 export default function EditProducts() {
   const router = useRouter();
-  const params = useParams();
-  const { itemId } = params;
+  const params = useParams<{ itemId: string }>();
+  const itemId = params.itemId;
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -19,12 +20,18 @@ export default function EditProducts() {
 
   useEffect(() => {
     if (!itemId) return;
+    const itemIdNum = Number(itemId);
+    if (isNaN(itemIdNum)) {
+      router.push("/items");
+      return;
+    }
+
     const fetchProduct = async () => {
       try {
-        const productData = await getProductsById(itemId);
+        const productData = await getProductsById(itemIdNum);
         setName(productData.name);
         setDescription(productData.description);
-        setPrice(productData.price);
+        setPrice(String(productData.price));
         setTags(productData.tags.join(", "));
       } catch (error) {
         console.error("게시글 로딩 실패:", error);
@@ -40,6 +47,11 @@ export default function EditProducts() {
 
   const handleSubmit = async () => {
     if (isDisabled) return;
+    const itemIdNum = Number(itemId);
+    if (isNaN(itemIdNum)) {
+      router.push("/items");
+      return;
+    }
     setIsLoading(true);
 
     try {
@@ -52,7 +64,7 @@ export default function EditProducts() {
           .map((tag) => tag.trim())
           .filter((tag) => tag.length > 0),
       };
-      await patchProduct(itemId, updatedProduct);
+      await patchProduct(itemIdNum, updatedProduct);
       router.push(`/items/${itemId}`);
     } catch (error) {
       console.error("게시글 수정 실패:", error);
@@ -85,13 +97,13 @@ export default function EditProducts() {
       </div>
       <div>
         <p>*가격</p>
-        <InputBox
+        <SmallInput
           type="number"
           placeholder="가격을 입력해주세요(필수)"
           className="h-14"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-        ></InputBox>
+        ></SmallInput>
       </div>
       <div>
         <p>상품 설명</p>

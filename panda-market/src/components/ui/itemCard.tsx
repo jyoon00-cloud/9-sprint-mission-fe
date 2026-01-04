@@ -1,7 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Product } from "@/types";
 
-export function ItemCardList({ products = [] }) {
+interface ItemCardListProps {
+  products: Product[];
+}
+
+export function ItemCardList({ products = [] }: ItemCardListProps) {
   return (
     <div>
       {products.map((product) => (
@@ -27,14 +32,13 @@ export function ItemCardList({ products = [] }) {
               />
               <p className="font-semibold"> 닉네임 </p>
               <p className="text-gray-400">
-                {" "}
                 {new Date(product.createdAt).toLocaleDateString()}
               </p>
             </div>
             <div className="flex gap-8">
               <div>
                 <p className="text-gray-500">
-                  {product.price.toLocaleString("ko-kr")}원{" "}
+                  {product.price.toLocaleString("ko-kr")}원
                 </p>
               </div>
               <div>

@@ -5,18 +5,29 @@ import { BtnSmall } from "@/components/ui/button";
 import { useState } from "react";
 import { InputBox } from "@/components/ui/inputBox";
 import { usePathname } from "next/navigation";
+import type { Comment } from "@/types";
 
-export default function CommentList({ comments = [], onUpdate, onDelete }) {
+interface CommentListProps {
+  comments: Comment[];
+  onUpdate: (commentId: number, content: string) => Promise<void> | void;
+  onDelete: (commentId: number) => Promise<void> | void;
+}
+
+export default function CommentList({
+  comments = [],
+  onUpdate,
+  onDelete,
+}: CommentListProps) {
   const pathName = usePathname();
   const pathImg = pathName.startsWith("/forum/")
     ? "/img_reply_empty.png"
     : "/Img_inquiry_empty.png";
   const pathAlt = pathName.startsWith("/forum/") ? "댓글 없음" : "문의 없음";
 
-  const [editingCommentId, setEditingCommentId] = useState(null);
-  const [updatedContent, setUpdatedContent] = useState("");
+  const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
+  const [updatedContent, setUpdatedContent] = useState<string>("");
 
-  const handleEditClick = (comment) => {
+  const handleEditClick = (comment: Comment) => {
     setEditingCommentId(comment.id);
     setUpdatedContent(comment.content);
   };
@@ -26,7 +37,7 @@ export default function CommentList({ comments = [], onUpdate, onDelete }) {
     setUpdatedContent("");
   };
 
-  const handleSaveEdit = (commentId) => {
+  const handleSaveEdit = (commentId: number) => {
     onUpdate(commentId, updatedContent);
     handleCancelEdit();
   };
@@ -117,7 +128,13 @@ export default function CommentList({ comments = [], onUpdate, onDelete }) {
   );
 }
 
-function CommentDropdown({ onEdit, onDelete }) {
+function CommentDropdown({
+  onEdit,
+  onDelete,
+}: {
+  onEdit: () => void;
+  onDelete: () => void;
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

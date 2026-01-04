@@ -6,15 +6,17 @@ import ForumList from "@/components/ui/forumList";
 
 export default async function ForumHome() {
   const initialArticlesData = await getArticles({ orderBy: "recent" });
+  const orderBestArticles = await getArticles({ orderBy: "likes" });
+  const bestArticles = (orderBestArticles?.data || []).slice(0, 3);
   return (
     <div className="w-full flex justify-center">
       <div className="w-full max-w-400 ">
         <div className="m-20 ">
           <h2 className="font-bold text-xl text-gray-900">베스트 게시글</h2>
           <div className="flex">
-            <BestCard />
-            <BestCard />
-            <BestCard />
+            {bestArticles.map((art) => (
+              <BestCard key={art.id} article={art} />
+            ))}
           </div>
         </div>
         <div className="flex flex-col mx-20 mb-10">

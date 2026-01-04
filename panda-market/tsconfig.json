@@ -4,7 +4,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "module": "nodenext",
+    "module": "esnext",
     "target": "esnext",
     "types": [],
     "sourceMap": true,

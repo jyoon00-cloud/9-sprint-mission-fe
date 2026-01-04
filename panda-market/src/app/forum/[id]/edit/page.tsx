@@ -7,19 +7,21 @@ import { useRouter, useParams } from "next/navigation";
 
 export default function EditForum() {
   const router = useRouter();
-  const params = useParams();
-  const { id } = params;
+  const params = useParams<{ id: string }>();
+  const id = params.id;
 
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const articleId = Number(id);
+
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const isDisabled = title.trim() === "" || content.trim() === "" || isLoading;
 
   useEffect(() => {
     if (!id) return;
     const fetchArticle = async () => {
       try {
-        const articleData = await getArticleById(id);
+        const articleData = await getArticleById(articleId);
         setTitle(articleData.title);
         setContent(articleData.content);
       } catch (error) {
@@ -32,7 +34,7 @@ export default function EditForum() {
     };
 
     fetchArticle();
-  }, [id, router]);
+  }, [id, articleId, router]);
 
   const handleSubmit = async () => {
     if (isDisabled) return;
@@ -40,8 +42,8 @@ export default function EditForum() {
 
     try {
       const updatedArticle = { title, content };
-      await patchArticle(id, updatedArticle);
-      router.push(`/forum/${id}`);
+      await patchArticle(articleId, updatedArticle);
+      router.push(`/forum/${articleId}`);
     } catch (error) {
       console.error("게시글 수정 실패:", error);
       alert("게시글 수정 실패");
@@ -68,7 +70,9 @@ export default function EditForum() {
           placeholder="제목을 입력해주세요"
           className="h-14"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+            setTitle(e.target.value)
+          }
         ></InputBox>
       </div>
       <div>
@@ -77,7 +81,9 @@ export default function EditForum() {
           placeholder="내용을 입력해주세요"
           className="h-71"
           value={content}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+            setContent(e.target.value)
+          }
         ></InputBox>
       </div>
     </div>

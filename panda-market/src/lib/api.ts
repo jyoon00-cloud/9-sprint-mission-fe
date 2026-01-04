@@ -1,6 +1,8 @@
-import axios from "axios";
+import axios, { type AxiosInstance } from "axios";
 
-const BASE_URL = "https://panda-market-api.vercel.app";
-const api = axios.create({
+const BASE_URL: string = "https://panda-market-api.vercel.app";
+const api: AxiosInstance = axios.create({
   baseURL: BASE_URL,
 });
+
+export default api;

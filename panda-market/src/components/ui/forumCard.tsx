@@ -1,17 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Article } from "@/types";
 
-export function BestCard() {
+interface BestCardProps {
+  article: Article;
+}
+
+export function BestCard({ article }: BestCardProps) {
   return (
-    <div className=" flex w-96 h-42.25 pl-6 pr-6 flex-col items-center gap-2.5">
+    <div className="flex w-96 h-42.25 pl-6 pr-6 flex-col items-center gap-2.5">
       <Image src="/img_badge.png" alt="BEST" width={102} height={30} />
       <div className="w-84 justify-center items-start gap-2">
         <p className="w-84 shrink-0 text-xl leading-8 font-semibold ">
-          맥북 16인치 16기가 1테라 정도 사양이면 얼마에 팔아야하나요?
+          {article.title}
         </p>
         <Image src="/product1.png" alt="상품" width={48} height={44.5} />
       </div>
-      <div className=" inline-flex gap-2 content-between w-full justify-between items-center">
+      <div className="inline-flex gap-2 content-between w-full justify-between items-center">
         <div className="flex gap-2">
           <p className="text-gray-600">닉네임</p>
           <p className="text-gray-500">♡ 0000+ </p>
@@ -22,7 +27,7 @@ export function BestCard() {
   );
 }
 
-export function CardList({ articles = [] }) {
+export function CardList({ articles = [] }: { articles: Article[] }) {
   return (
     <div>
       {articles.map((article) => (
@@ -52,7 +57,6 @@ export function CardList({ articles = [] }) {
                 {new Date(article.createdAt).toLocaleDateString()}
               </p>
             </div>
-
             <div>
               <p className="text-gray-500">♡ 999+ </p>
             </div>

@@ -3,7 +3,7 @@ import { BtnLarge } from "@/components/ui/button";
 import { SmallInput } from "@/components/ui/inputBox";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent, type ChangeEvent } from "react";
 import Modal from "@/components/ui/modal";
 import { useRouter } from "next/navigation";
 import { postSignIn } from "@/lib/api/auth";
@@ -25,7 +25,7 @@ export default function SignIn() {
     }
   }, [router]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValues((preValues) => ({
       ...preValues,
@@ -33,7 +33,7 @@ export default function SignIn() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!values.email || !values.password) {
       setModalMessage("모든 항목을 입력해주세요.");

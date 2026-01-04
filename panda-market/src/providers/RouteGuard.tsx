@@ -1,32 +1,30 @@
-// src/providers/RouteGuard.jsx
 "use client";
 
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-
+import { useAuth } from "@/context/AuthContext";
 
 // 로그인된 사용자만 접근 가능한 경로
-const protectedPaths = [
-  "/forum",
-  "/items",
-];
+const protectedPaths: string[] = ["/forum", "/items"];
 
 // 미인증 사용자만 접근 가능한 경로
-const publicPaths = [
-  "/signIn",
-  "/signUp",
-];
+const publicPaths: string[] = ["/signIn", "/signUp"];
 
-export default function RouteGuard({ children }) {
+interface RouteGuardProps {
+  children: React.ReactNode;
+}
+
+export default function RouteGuard({ children }: RouteGuardProps) {
   const { user } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    setTimeout(() => {
+    const checkAuth = setTimeout(() => {
+      if (!pathname) return;
       // pathname을 경로와 쿼리 부분으로 분리
-      const path = pathname.split("?")[0];
+      const path = pathname.split("?")[0] || "";
 
       // 정확한 경로 매칭 또는 하위 경로 매칭
       const isProtectedRoute = protectedPaths.some(
@@ -43,7 +41,7 @@ export default function RouteGuard({ children }) {
       // 사용자의 인증 상태에 따른 리다이렉트 처리
       if (isProtectedRoute && !user) {
         // 인증된 사용자만 접근 가능한 경로에 미인증 사용자가 접근
-        router.push("/login");
+        router.push("/signIn");
       } else if (isPublicRoute && user) {
         // 미인증 사용자만 접근 가능한 경로에 인증된 사용자가 접근
         router.push("/");
